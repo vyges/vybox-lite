@@ -1,0 +1,11 @@
+{
+  "terminal.integrated.fontWeight": "bold",
+  "terminal.integrated.fontFamily": "monospace",
+  "terminal.integrated.defaultProfile.linux": "bash",
+  "terminal.integrated.defaultProfile.windows": "powershell",
+  "terminal.integrated.defaultProfile.darwin": "zsh",
+  "files.associations": {
+    "*.vyges.json": "json"
+  },
+  "workbench.startupEditor": "readme"
+}

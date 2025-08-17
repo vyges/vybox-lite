@@ -1,0 +1,110 @@
+{
+  "name": "VyBox Lite - Codespaces",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
+  "postCreateCommand": "bash scripts/welcome.sh",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode.cpptools-extension-pack",
+        "ms-vscode.python-extension-pack",
+        "ms-vscode.vscode-typescript-next",
+        "tamasfe.even-better-toml",
+        "ms-vscode.makefile-tools",
+        "ms-vscode.vscode-json",
+        "redhat.vscode-yaml",
+        "ms-vscode.hexeditor",
+        "ms-vscode.remote-containers",
+        "ms-vscode.vscode-git-graph",
+        "eamodio.gitlens"
+      ],
+      "settings": {
+        "workbench.colorTheme": "Vyges IDE Dark",
+        "workbench.colorCustomizations": {
+          "editor.background": "#121212",
+          "editor.foreground": "#E0E0E0",
+          "focusBorder": "#1A1A1A",
+          "widget.shadow": "#00000033",
+          "activityBar.background": "#181818",
+          "activityBar.foreground": "#D4D4D4",
+          "activityBar.border": "#2A2A2A",
+          "sideBar.background": "#181818",
+          "sideBar.foreground": "#CCCCCC",
+          "sideBar.border": "#2A2A2A",
+          "list.hoverBackground": "#2A2A2A",
+          "list.activeSelectionBackground": "#333333",
+          "list.focusBackground": "#2A2A2A",
+          "panel.background": "#181818",
+          "panel.border": "#2A2A2A",
+          "panelTitle.activeBorder": "#333333",
+          "panelTitle.activeForeground": "#E0E0E0",
+          "panelTitle.inactiveForeground": "#999999",
+          "statusBar.background": "#121212",
+          "statusBar.noFolderBackground": "#121212",
+          "statusBar.border": "#2A2A2A",
+          "titleBar.activeBackground": "#121212",
+          "titleBar.activeForeground": "#ffffff",
+          "titleBar.inactiveBackground": "#121212",
+          "editorGroupHeader.tabsBackground": "#181818",
+          "tab.border": "#2A2A2A",
+          "tab.inactiveBackground": "#181818",
+          "tab.activeBackground": "#121212",
+          "input.background": "#2A2A2A",
+          "input.border": "#333333",
+          "button.background": "#333333",
+          "button.hoverBackground": "#444444",
+          "dropdown.background": "#2A2A2A",
+          "dropdown.border": "#333333",
+          "editorWidget.background": "#181818",
+          "editorWidget.border": "#2A2A2A"
+        },
+        "editor.tokenColorCustomizations": {
+          "semanticHighlighting": true,
+          "semanticTokenColors": {
+            "variable.defaultLibrary": "#ffffff",
+            "variable.readonly": "#ffb86c",
+            "parameter": "#f8f8f2",
+            "function": "#61afef",
+            "method": "#61afef",
+            "class": "#e5c07b",
+            "namespace": "#c678dd",
+            "enum": "#56b6c2",
+            "interface": "#56b6c2",
+            "type": "#56b6c2",
+            "typeParameter": "#56b6c2",
+            "property": "#56b6c2",
+            "event": "#56b6c2",
+            "keyword": "#ff79c6",
+            "macro": "#ff79c6"
+          }
+        },
+        "workbench.startupEditor": "readme",
+        "files.watcherExclude": {
+          "**/node_modules": true,
+          "**/.git": true
+        }
+      },
+      "settingsProfiles": {
+        "Vyges Blue": {
+          "workbench.colorCustomizations": {
+            "editorCursor.foreground": "#18A7C4",
+            "editor.lineHighlightBorder": "#18A7C4",
+            "button.background": "#18A7C4",
+            "tab.activeBorderTop": "#18A7C4",
+            "statusBar.foreground": "#18A7C4",
+            "titleBar.activeForeground": "#18A7C4"
+          }
+        },
+        "Vyges Pink": {
+          "workbench.colorCustomizations": {
+            "editorCursor.foreground": "#E81A89",
+            "editor.lineHighlightBorder": "#E81A89",
+            "button.background": "#E81A89",
+            "tab.activeBorderTop": "#E81A89",
+            "statusBar.foreground": "#E81A89",
+            "titleBar.activeForeground": "#E81A89"
+          }
+        }
+      }
+    }
+  }
+}
