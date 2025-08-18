@@ -54,8 +54,8 @@ RUN git config --global init.defaultBranch main \
 # Layer 7: Python & LLM environment (as vscode user)
 RUN pip3 install --user --no-cache-dir --break-system-packages \
       cocotb pytest pytest-cov black flake8 mypy llm \
- && llm install llm-github-models \
- && llm models default github/gpt-4.1 \
+ && /home/vscode/.local/bin/llm install llm-github-models \
+ && /home/vscode/.local/bin/llm models default github/gpt-4.1 \
  && python3 -m venv /home/vscode/vyges-venv \
  && echo 'source ~/vyges-venv/bin/activate' >> /home/vscode/.bashrc \
  && echo 'export PATH="$HOME/.local/bin:$PATH"' >> /home/vscode/.bashrc

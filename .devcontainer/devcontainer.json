@@ -18,7 +18,8 @@
         "ms-vscode.hexeditor",
         "ms-vscode.remote-containers",
         "ms-vscode.vscode-git-graph",
-        "eamodio.gitlens"
+        "eamodio.gitlens",
+        "GitHub.copilot-chat"
       ],
       "settings": {
         "workbench.colorTheme": "Vyges IDE Dark",
