@@ -33,6 +33,30 @@ Once your Codespace is running, you can:
 
 Choose your preferred machine size:
 
+## ⚠️ Important Licensing Notice
+
+**Only development content is licensed under Apache-2.0.** 
+Environment setup and AI context files are proprietary Vyges components.
+
+**What's Apache-2.0 Licensed:**
+- Custom scripts and tools you create
+- Documentation you write
+- Environment customizations you develop
+
+**What's NOT Apache-2.0 Licensed:**
+- DevContainer configuration and Docker setup
+- Pre-installed EDA tools and development tools
+- AI context files (`.vyges-ai-context.json`, `.copilot-chat-context.md`)
+- Environment structure and build processes
+
+**Usage Terms:**
+- You can use the environment for development
+- You can create and modify content within the environment
+- You cannot redistribute the environment configuration
+- AI context files are provided for use only within this Codespaces environment
+
+See [LICENSE_SCOPE.md](LICENSE_SCOPE.md) and [NOTICE](NOTICE) for complete details.
+
 | Option | vCPUs | RAM | Free Tier? | Recommended For |
 |--------|-------|-----|------------|-----------------|
 | **Free Tier** | 2 | 4 GB | ✅ 60 hours/month (public repos) | Trying VyBox Lite or light workloads |

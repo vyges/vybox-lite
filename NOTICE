@@ -1,0 +1,68 @@
+VyBox Lite Development Environment
+Copyright (c) 2025 Vyges
+
+Licensed under the Apache License, Version 2.0 (the "License").
+You may obtain a copy of the License at:
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+
+---
+
+## License Scope Clarification
+
+**This Apache-2.0 license applies to:**
+- Development environment content (custom scripts, tools, configurations)
+- Development documentation and guides
+- Custom automation and workflow scripts
+- Environment customizations and extensions
+- Generated development content and reports
+
+**This license does NOT apply to:**
+- The development environment structure and configuration
+- Container build processes and Docker setup
+- Pre-installed EDA tools and development tools
+- Environment metadata and configuration templates
+- The Vyges CLI tool and related tooling
+- **AI context and processing engine components:**
+  - `.vyges-ai-context.json` - AI development context and prompts
+  - `.copilot-chat-context.md` - GitHub Copilot integration context
+  - AI-generated code patterns and development workflows
+  - AI prompt engineering and context management systems
+
+The environment provides a framework for IP development but the licensing terms apply specifically to the development content you create using this framework. The environment configuration and AI context are proprietary Vyges components provided as-is for enhanced development experience.
+
+---
+
+This repository provides a GitHub Codespaces development environment for Vyges IP development:
+https://github.com/vyges/vybox-lite
+
+This development environment is part of the Vyges open silicon ecosystem:
+https://vyges.com
+
+Includes development tools and EDA software:
+- [Yosys](https://github.com/YosysHQ/yosys) - ISC License
+- [Verilator](https://github.com/verilator/verilator) - LGPLv3
+- [Icarus Verilog](https://github.com/steveicarus/iverilog) - GPLv2
+- [GTKWave](https://github.com/gtkwave/gtkwave) - GPLv2
+- [Cocotb](https://github.com/cocotb/cocotb) - BSD License
+- [LLM CLI](https://github.com/simonw/llm) - Apache 2.0
+
+You may redistribute and use this development content in accordance with the license file (LICENSE).
+
+This product includes no commercial EDA vendor IP or confidential third-party content.
+
+All trademarks mentioned belong to their respective owners.
+
+---
+
+# Development Environment User Attribution
+# (Add your own copyright, maintainer, and project info below)
+
+Maintainers:
+<Your Name> <your.email@example.com>
+<GitHub handle, website, or affiliation>
+
