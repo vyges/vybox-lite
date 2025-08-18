@@ -4,7 +4,7 @@
     "dockerfile": "Dockerfile",
     "context": "."
   },
-  "postCreateCommand": "bash ./scripts/welcome.sh",
+  "postCreateCommand": "cd /workspaces/vybox-lite && bash ./scripts/welcome.sh",
   "customizations": {
     "vscode": {
       "extensions": [
