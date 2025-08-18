@@ -12,8 +12,8 @@ This template sets up:
 
 Click here to launch in GitHub Codespaces:
 
-[![Launch in Codespaces - 2-Core Free Tier](https://github.com/codespaces/badge.svg)](https://codespaces.new/vyges/vybox-lite?quickstart=1)
-[![Launch in Codespaces - 4-Core Fast Lane](https://github.com/codespaces/badge.svg)](https://codespaces.new/vyges/vybox-lite?quickstart=1&machine=STANDARD)
+[![Launch in Codespaces - 2-Core](https://img.shields.io/badge/Launch_in_Codespaces-2--Core-blue?style=for-the-badge&logo=github)](https://codespaces.new/vyges/vybox-lite?quickstart=1){:target="_blank"}
+[![Launch in Codespaces - 4-Core](https://img.shields.io/badge/Launch_in_Codespaces-4--Core-green?style=for-the-badge&logo=github)](https://codespaces.new/vyges/vybox-lite?quickstart=1&machine=STANDARD){:target="_blank"}
 
 Choose your preferred machine size:
 

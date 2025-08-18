@@ -52,13 +52,14 @@ RUN git config --global init.defaultBranch main \
  && git config --global user.email "vscode@vybox.local"
 
 # Layer 7: Python & LLM environment (as vscode user)
-RUN pip3 install --user --no-cache-dir --break-system-packages \
+RUN python3 -m venv /home/vscode/vyges-venv \
+ && . /home/vscode/vyges-venv/bin/activate \
+ && pip3 install --no-cache-dir \
       cocotb pytest pytest-cov black flake8 mypy llm \
- && /home/vscode/.local/bin/llm install llm-github-models \
- && /home/vscode/.local/bin/llm models default github/gpt-4.1 \
- && python3 -m venv /home/vscode/vyges-venv \
+ && /home/vscode/vyges-venv/bin/llm install llm-github-models \
+ && /home/vscode/vyges-venv/bin/llm models default github/gpt-4.1 \
  && echo 'source ~/vyges-venv/bin/activate' >> /home/vscode/.bashrc \
- && echo 'export PATH="$HOME/.local/bin:$PATH"' >> /home/vscode/.bashrc
+ && echo 'export PATH="$HOME/vyges-venv/bin:$PATH"' >> /home/vscode/.bashrc
 
 # Default shell
 CMD ["/bin/bash"]
