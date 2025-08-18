@@ -18,7 +18,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
 RUN apt-get update && apt-get install -y \
     sudo git curl wget ca-certificates build-essential tree unzip locales \
     make gcc g++ pkg-config python3 python3-pip python3-venv pandoc time \
-    verilator iverilog gtkwave yosys \
+    verilator iverilog gtkwave yosys xvfb \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
@@ -34,7 +34,9 @@ RUN curl -sSL https://raw.githubusercontent.com/vyges/vyges-metadata-spec/main/s
        -o /opt/vyges/vyges-metadata.schema.json \
  && curl -sSL https://raw.githubusercontent.com/vyges/vyges-ip-template/refs/heads/main/.vyges-ai-context.json \
        -o /home/vscode/.vyges-ai-context.json \
- && chown vscode:vscode /home/vscode/.vyges-ai-context.json
+ && curl -sSL https://raw.githubusercontent.com/vyges/vyges-ip-template/refs/heads/main/.copilot-chat-context.md \
+       -o /home/vscode/.copilot-chat-context.md \
+ && chown vscode:vscode /home/vscode/.vyges-ai-context.json /home/vscode/.copilot-chat-context.md
 
 # Layer 5: Branding MOTD (as root)
 RUN echo '---------------------------------' > /etc/motd \
@@ -59,7 +61,8 @@ RUN python3 -m venv /home/vscode/vyges-venv \
  && /home/vscode/vyges-venv/bin/llm install llm-github-models \
  && /home/vscode/vyges-venv/bin/llm models default github/gpt-4.1 \
  && echo 'source ~/vyges-venv/bin/activate' >> /home/vscode/.bashrc \
- && echo 'export PATH="$HOME/vyges-venv/bin:$PATH"' >> /home/vscode/.bashrc
+ && echo 'export PATH="$HOME/vyges-venv/bin:$PATH"' >> /home/vscode/.bashrc \
+ && echo 'export DISPLAY=:99' >> /home/vscode/.bashrc
 
 # Default shell
 CMD ["/bin/bash"]

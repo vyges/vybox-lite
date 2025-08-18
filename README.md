@@ -11,13 +11,25 @@ This template sets up:
 ## 🚀 Quick Start
 
 Click here to launch in GitHub Codespaces:
+
 <a href="https://codespaces.new/vyges/vybox-lite?quickstart=1" target="_blank">
   <img src="https://img.shields.io/badge/Launch_in_Codespaces-2--Core-blue?style=for-the-badge&logo=github" alt="Launch in Codespaces - 2-Core"/>
 </a>
-
 <a href="https://codespaces.new/vyges/vybox-lite?quickstart=1&machine=STANDARD" target="_blank">
   <img src="https://img.shields.io/badge/Launch_in_Codespaces-4--Core-green?style=for-the-badge&logo=github" alt="Launch in Codespaces - 4-Core"/>
 </a>
+
+Once your Codespace is running, you can:
+
+- **Clone an existing repository:**
+  ```bash
+  git clone <repo_url>
+  ```
+
+- **Create a new Silicon IP repository:**
+  - Use the <a href="https://github.com/vyges/vyges-ip-template/generate" target="_blank"><img src="https://img.shields.io/badge/Vyges_IP_Template-Orange?style=for-the-badge&logo=github&color=orange" alt="Vyges IP Template"/></a> to create a new repository
+  - Clone it into your Codespace
+  - Start developing with pre-configured tools and context
 
 Choose your preferred machine size:
 
