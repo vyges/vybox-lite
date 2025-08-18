@@ -1,6 +1,9 @@
 {
   "name": "VyBox Lite - Codespaces",
-  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": "."
+  },
   "postCreateCommand": "bash scripts/welcome.sh",
   "customizations": {
     "vscode": {
