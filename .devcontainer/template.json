@@ -1,0 +1,7 @@
+{
+  "name": "VyBox Lite Codespace",
+  "description": "Browser-accessible development environment for silicon IP and chiplet projects, powered by Vyges.",
+  "icon": "https://vyges.com/assets/images/logo.png",
+  "repository": "https://github.com/vyges/vybox-lite"
+}
+
