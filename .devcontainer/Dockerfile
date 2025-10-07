@@ -67,7 +67,6 @@ RUN python3 -m venv /home/vscode/vyges-venv \
 # Layer 8: Node.js dependencies for seamless authentication (as vscode user)
 RUN cd /home/vscode \
  && npm install axios \
- && chmod +x /workspaces/vybox-lite/scripts/seamless-auth.js \
  && echo "VyBox Lite environment ready with Vyges.VyContext extension and seamless authentication"
 
 # Default shell
