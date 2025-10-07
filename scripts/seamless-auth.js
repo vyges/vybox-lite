@@ -8,14 +8,19 @@
 const axios = require('axios');
 const fs = require('fs').promises;
 const path = require('path');
+const os = require('os');
 
 // Configuration
 const CONFIG = {
     vygesApiUrl: 'https://auth.services.vyges.com',
     vygesRealm: 'vyges',
     vygesClientId: 'profile-service',
-    userDataPath: '/home/vscode/.vyges-user.json',
-    tokenPath: '/home/vscode/.vyges-token'
+    userDataPath: path.join(os.homedir(), '.vyges-user.json'),
+    tokenPath: path.join(os.homedir(), '.vyges', 'token.json'),
+    // GitHub Codespaces environment detection
+    isCodespaces: process.env.CODESPACES === 'true' || process.env.GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN,
+    // Token exchange endpoint
+    exchangeEndpoint: 'https://auth.services.vyges.com/realms/vyges/protocol/openid-connect/token'
 };
 
 /**
@@ -34,9 +39,17 @@ async function seamlessAuthentication() {
         }
 
         // Get GitHub token from Codespaces environment
-        const githubToken = process.env.GITHUB_TOKEN;
+        const githubToken = process.env.GITHUB_TOKEN || process.env.GH_TOKEN;
         if (!githubToken) {
-            throw new Error('GITHUB_TOKEN not found in Codespaces environment');
+            console.log('💡 No GitHub token found in environment');
+            console.log('🔍 Available environment variables:');
+            Object.keys(process.env)
+                .filter(key => key.includes('GITHUB') || key.includes('GH') || key.includes('CODESPACE'))
+                .forEach(key => console.log(`   ${key}=${process.env[key] ? '***' : 'undefined'}`));
+            
+            // Try alternative authentication methods
+            console.log('🔄 Attempting alternative authentication...');
+            return await attemptAlternativeAuth();
         }
 
         console.log('🔑 Using GitHub token for seamless authentication...');
@@ -45,8 +58,8 @@ async function seamlessAuthentication() {
         const githubUser = await getGitHubUserInfo(githubToken);
         console.log(`👤 GitHub user: ${githubUser.login} (${githubUser.email})`);
 
-        // Step 2: Authenticate with Vyges using GitHub credentials
-        const authResult = await authenticateWithVyges(githubUser, githubToken);
+        // Step 2: Exchange GitHub token for Vyges JWT
+        const authResult = await exchangeGitHubForVyges(githubUser, githubToken);
         
         if (authResult.success) {
             await saveToken(authResult.token);
@@ -93,6 +106,123 @@ async function getGitHubUserInfo(token) {
         };
     } catch (error) {
         throw new Error(`GitHub API error: ${error.message}`);
+    }
+}
+
+/**
+ * Exchange GitHub token for Vyges JWT using Keycloak broker
+ */
+async function exchangeGitHubForVyges(githubUser, githubToken) {
+    try {
+        console.log('🔄 Exchanging GitHub token for Vyges JWT...');
+        
+        // Method 1: Try direct Keycloak broker exchange
+        try {
+            const brokerUrl = `${CONFIG.vygesApiUrl}/realms/${CONFIG.vygesRealm}/broker/github/token`;
+            const response = await axios.post(brokerUrl, {
+                access_token: githubToken
+            }, {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                timeout: 10000
+            });
+
+            if (response.data.access_token) {
+                console.log('✅ Token exchange successful via Keycloak broker');
+                return {
+                    success: true,
+                    token: response.data.access_token,
+                    user: {
+                        ...githubUser,
+                        is_seamless_auth: true,
+                        auth_method: 'keycloak_broker'
+                    }
+                };
+            }
+        } catch (brokerError) {
+            console.log('⚠️ Keycloak broker exchange failed, trying direct registration...');
+        }
+
+        // Method 2: Use the existing authenticateWithVyges function
+        return await authenticateWithVyges(githubUser, githubToken);
+
+    } catch (error) {
+        console.error('❌ Token exchange failed:', error.response?.data || error.message);
+        
+        // Check if it's an email conflict error
+        if (error.response?.data?.error === 'email_already_exists' || 
+            error.response?.data?.message?.includes('email already exists')) {
+            console.log('📧 Email already exists - attempting account linking...');
+            
+            // Try to authenticate with existing account
+            try {
+                const authResult = await authenticateWithVyges(githubUser);
+                if (authResult.success) {
+                    console.log('✅ Successfully linked to existing account');
+                    return authResult;
+                }
+            } catch (linkError) {
+                console.log('⚠️ Account linking failed, creating local account...');
+            }
+        }
+        
+        // If registration/linking fails, create a local account
+        console.log('🔄 Creating local account as fallback...');
+        return await createLocalAccount(githubUser);
+    }
+}
+
+/**
+ * Attempt alternative authentication methods
+ */
+async function attemptAlternativeAuth() {
+    try {
+        console.log('🔄 Trying alternative authentication methods...');
+        
+        // Check if we're in Codespaces
+        if (CONFIG.isCodespaces) {
+            console.log('🏗️ Detected Codespaces environment');
+            
+            // Try to get Codespace information
+            const codespaceName = process.env.CODESPACE_NAME;
+            const codespaceOwner = process.env.CODESPACE_OWNER;
+            
+            if (codespaceName && codespaceOwner) {
+                console.log(`📦 Codespace: ${codespaceName} (Owner: ${codespaceOwner})`);
+                
+                // Create a local account based on Codespace info
+                const localUser = {
+                    id: `codespace_${codespaceName}`,
+                    username: codespaceOwner,
+                    email: `${codespaceOwner}@github.com`, // Placeholder email
+                    name: codespaceOwner,
+                    subscription_tier: 'free',
+                    created_via: 'codespaces_local',
+                    is_local_account: true
+                };
+                
+                return await createLocalAccount(localUser);
+            }
+        }
+        
+        // Fallback: Create anonymous local account
+        console.log('🔄 Creating anonymous local account...');
+        const anonymousUser = {
+            id: `anonymous_${Date.now()}`,
+            username: 'anonymous',
+            email: 'anonymous@local.dev',
+            name: 'Anonymous User',
+            subscription_tier: 'free',
+            created_via: 'fallback',
+            is_local_account: true
+        };
+        
+        return await createLocalAccount(anonymousUser);
+        
+    } catch (error) {
+        console.error('❌ Alternative authentication failed:', error.message);
+        throw error;
     }
 }
 
@@ -183,8 +313,27 @@ async function registerUserWithVyges(githubUser, githubToken) {
         }
 
     } catch (error) {
-        // If registration fails, create a local account with free tier
-        console.log('📝 Registration failed, creating local account...');
+        console.error('❌ Registration failed:', error.response?.data || error.message);
+        
+        // Check if it's an email conflict error
+        if (error.response?.data?.error === 'email_already_exists' || 
+            error.response?.data?.message?.includes('email already exists')) {
+            console.log('📧 Email already exists - attempting account linking...');
+            
+            // Try to authenticate with existing account
+            try {
+                const authResult = await authenticateWithVyges(githubUser);
+                if (authResult.success) {
+                    console.log('✅ Successfully linked to existing account');
+                    return authResult;
+                }
+            } catch (linkError) {
+                console.log('⚠️ Account linking failed, creating local account...');
+            }
+        }
+        
+        // If registration/linking fails, create a local account
+        console.log('🔄 Creating local account as fallback...');
         return await createLocalAccount(githubUser);
     }
 }
@@ -376,9 +525,23 @@ async function loadExistingToken() {
 
 async function saveToken(token) {
     try {
-        await fs.writeFile(CONFIG.tokenPath, token, { mode: 0o600 });
+        // Ensure the directory exists
+        const tokenDir = path.dirname(CONFIG.tokenPath);
+        await fs.mkdir(tokenDir, { recursive: true });
+        
+        // Save token in JSON format for better compatibility
+        const tokenData = {
+            access_token: token,
+            token_type: 'Bearer',
+            expires_at: new Date(Date.now() + (24 * 60 * 60 * 1000)).toISOString(), // 24 hours
+            created_at: new Date().toISOString(),
+            source: 'seamless_auth'
+        };
+        
+        await fs.writeFile(CONFIG.tokenPath, JSON.stringify(tokenData, null, 2), { mode: 0o600 });
+        console.log(`💾 Token saved to: ${CONFIG.tokenPath}`);
     } catch (error) {
-        console.error('Failed to save token:', error.message);
+        console.error('❌ Failed to save token:', error.message);
     }
 }
 

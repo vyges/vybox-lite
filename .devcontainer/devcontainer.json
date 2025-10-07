@@ -89,10 +89,12 @@
         },
         "vycontext.keycloakUrl": "https://auth.services.vyges.com",
         "vycontext.keycloakRealm": "vyges",
-        "vycontext.keycloakClientId": "profile-service",
+        "vycontext.keycloakClientId": "account-console",
         "vycontext.autoAuth": true,
         "vycontext.showWelcomeMessage": true,
-        "vycontext.enableUpgradePrompts": true
+        "vycontext.enableUpgradePrompts": true,
+        "vycontext.redirectUri": "https://profile.services.vyges.com/",
+        "vycontext.environment": "codespaces"
       },
       "settingsProfiles": {
         "Vyges Blue": {
