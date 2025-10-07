@@ -19,7 +19,8 @@
         "ms-vscode.remote-containers",
         "ms-vscode.vscode-git-graph",
         "eamodio.gitlens",
-        "GitHub.copilot-chat"
+        "GitHub.copilot-chat",
+        "vyges.VyContext"
       ],
       "settings": {
         "workbench.colorTheme": "Vyges IDE Dark",
@@ -85,7 +86,13 @@
         "files.watcherExclude": {
           "**/node_modules": true,
           "**/.git": true
-        }
+        },
+        "vycontext.keycloakUrl": "https://auth.services.vyges.com",
+        "vycontext.keycloakRealm": "vyges",
+        "vycontext.keycloakClientId": "profile-service",
+        "vycontext.autoAuth": true,
+        "vycontext.showWelcomeMessage": true,
+        "vycontext.enableUpgradePrompts": true
       },
       "settingsProfiles": {
         "Vyges Blue": {

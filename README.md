@@ -84,12 +84,39 @@ See [LICENSE_SCOPE.md](LICENSE_SCOPE.md) and [NOTICE](NOTICE) for complete detai
 This environment comes pre-configured with:
 - `vyges-cli` (when available)
 - `llm` CLI access to GitHub Models (e.g., GPT-4.1)
-- `.vyges-ai-context.json` to guide AI for silicon IP domain
+- **Vyges AI Context** with seamless authentication using GitHub credentials
+- **Vyges.VyContext VSCode extension** for intelligent context loading
+- `.vyges-ai-context.json` fallback for legacy support
+
+### 🎯 Vyges AI Authentication
+
+**Seamless Authentication**: Automatically authenticates using your GitHub credentials from Codespaces. No manual login required!
+
+**Features by Tier**:
+- **Free**: Basic RTL context, testbench patterns, limited synthesis
+- **Basic**: Full RTL/testbench context, DFT/JTAG patterns, pin/pad consistency
+- **Pro**: Advanced synthesis, formal verification, analog/mixed-signal context
+- **Max**: Security context, catalog integration, custom context generation
+
+**How It Works**:
+1. **Automatic**: Uses GitHub token from Codespaces environment
+2. **Registration**: Auto-creates Vyges account if user doesn't exist
+3. **Tier Assignment**: Assigns subscription tier based on GitHub profile
+4. **Context Loading**: Loads appropriate Vyges AI context automatically
+
+**Fallback Options**:
+- **Command Palette**: `Ctrl+Shift+P` → `Vyges: Login`
+- **Web Browser**: Visit https://profile.services.vyges.com
+- **Status Check**: `seamless-auth status`
 
 Try it:
 
 ```bash
+# Ask AI with Vyges context (automatically loaded after authentication)
 llm "Generate a Verilog module for an AXI4-Lite slave interface"
+
+# Or use Copilot with Vyges context (via VSCode extension)
+# Just start typing in any .sv file and Copilot will have Vyges context
 ```
 
 ## 💡 Why Codespaces?

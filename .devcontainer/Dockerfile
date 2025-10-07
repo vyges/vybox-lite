@@ -18,7 +18,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
 RUN apt-get update && apt-get install -y \
     sudo git curl wget ca-certificates build-essential tree unzip locales \
     make gcc g++ pkg-config python3 python3-pip python3-venv pandoc time \
-    verilator iverilog gtkwave yosys xvfb \
+    verilator iverilog gtkwave yosys xvfb nodejs npm \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
@@ -63,6 +63,12 @@ RUN python3 -m venv /home/vscode/vyges-venv \
  && echo 'source ~/vyges-venv/bin/activate' >> /home/vscode/.bashrc \
  && echo 'export PATH="$HOME/vyges-venv/bin:$PATH"' >> /home/vscode/.bashrc \
  && echo 'export DISPLAY=:99' >> /home/vscode/.bashrc
+
+# Layer 8: Node.js dependencies for seamless authentication (as vscode user)
+RUN cd /home/vscode \
+ && npm install axios \
+ && chmod +x /workspaces/vybox-lite/scripts/seamless-auth.js \
+ && echo "VyBox Lite environment ready with Vyges.VyContext extension and seamless authentication"
 
 # Default shell
 CMD ["/bin/bash"]

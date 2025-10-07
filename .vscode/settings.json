@@ -1,11 +1,105 @@
 {
-  "terminal.integrated.fontWeight": "bold",
-  "terminal.integrated.fontFamily": "monospace",
-  "terminal.integrated.defaultProfile.linux": "bash",
   "terminal.integrated.defaultProfile.windows": "powershell",
   "terminal.integrated.defaultProfile.darwin": "zsh",
-  "files.associations": {
-    "*.vyges.json": "json"
+  "workbench.colorTheme": "Dark+",
+  "workbench.colorCustomizations": {
+    "editor.background": "#121212",
+    "editor.foreground": "#E0E0E0",
+    "focusBorder": "#1A1A1A",
+    "widget.shadow": "#00000033",
+    "activityBar.background": "#181818",
+    "activityBar.foreground": "#D4D4D4",
+    "activityBar.border": "#2A2A2A",
+    "sideBar.background": "#181818",
+    "sideBar.foreground": "#CCCCCC",
+    "sideBar.border": "#2A2A2A",
+    "list.hoverBackground": "#2A2A2A",
+    "list.activeSelectionBackground": "#333333",
+    "list.focusBackground": "#2A2A2A",
+    "panel.background": "#181818",
+    "panel.border": "#2A2A2A",
+    "panelTitle.activeBorder": "#333333",
+    "panelTitle.activeForeground": "#E0E0E0",
+    "panelTitle.inactiveForeground": "#999999",
+    "statusBar.background": "#121212",
+    "statusBar.noFolderBackground": "#121212",
+    "statusBar.border": "#2A2A2A",
+    "titleBar.activeBackground": "#121212",
+    "titleBar.activeForeground": "#ffffff",
+    "titleBar.inactiveBackground": "#121212",
+    "editorGroupHeader.tabsBackground": "#181818",
+    "tab.border": "#2A2A2A",
+    "tab.inactiveBackground": "#181818",
+    "tab.activeBackground": "#121212",
+    "input.background": "#2A2A2A",
+    "input.border": "#333333",
+    "button.background": "#333333",
+    "button.hoverBackground": "#444444",
+    "dropdown.background": "#2A2A2A",
+    "dropdown.border": "#333333",
+    "editorWidget.background": "#181818",
+    "editorWidget.border": "#2A2A2A"
   },
-  "workbench.startupEditor": "readme"
+  "editor.semanticHighlighting.enabled": true,
+  "editor.tokenColorCustomizations": {
+    "textMateRules": [
+      {
+        "scope": ["variable.defaultLibrary"],
+        "settings": { "foreground": "#ffffff" }
+      },
+      {
+        "scope": ["variable.readonly"],
+        "settings": { "foreground": "#ffb86c" }
+      },
+      {
+        "scope": ["parameter"],
+        "settings": { "foreground": "#f8f8f2" }
+      },
+      {
+        "scope": ["function", "method"],
+        "settings": { "foreground": "#61afef" }
+      },
+      {
+        "scope": ["class"],
+        "settings": { "foreground": "#e5c07b" }
+      },
+      {
+        "scope": ["namespace"],
+        "settings": { "foreground": "#c678dd" }
+      },
+      {
+        "scope": ["enum", "interface", "type", "typeParameter", "property", "event"],
+        "settings": { "foreground": "#56b6c2" }
+      },
+      {
+        "scope": ["keyword", "macro"],
+        "settings": { "foreground": "#ff79c6" }
+      }
+    ]
+  },
+  "terminal.integrated.fontWeight": "bold",
+  "terminal.integrated.defaultProfile.linux": "bash",
+  "terminal.integrated.profiles.linux": {
+    "bash": {
+      "path": "/bin/bash",
+      "args": ["-l"]
+    }
+  },
+  "terminal.integrated.cursorBlinking": true,
+  "terminal.integrated.cursorStyle": "line",
+  "terminal.integrated.fontFamily": "JetBrains Mono, Consolas, 'Courier New', monospace",
+  "terminal.integrated.fontSize": 14,
+  "terminal.integrated.lineHeight": 1.2,
+  "terminal.integrated.shell.linux": "/bin/bash",
+  "workbench.startupEditor": "readme",
+  "files.watcherExclude": {
+    "**/node_modules": true,
+    "**/.git": true
+  },
+  "vycontext.keycloakUrl": "https://auth.services.vyges.com",
+  "vycontext.keycloakRealm": "vyges",
+  "vycontext.keycloakClientId": "profile-service",
+  "vycontext.autoAuth": true,
+  "vycontext.showWelcomeMessage": true,
+  "vycontext.enableUpgradePrompts": true
 }

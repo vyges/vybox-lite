@@ -64,6 +64,29 @@ if command -v llm &> /dev/null; then
 fi
 
 echo ""
+echo "🔐 Vyges Authentication:"
+echo "   Starting seamless authentication using your GitHub credentials..."
+cd /workspaces/vybox-lite/scripts && node seamless-auth.js authenticate
+
+echo ""
+echo "🎯 Vyges AI Context Setup:"
+echo "   • Extension: vyges.VyContext (pre-installed and configured)"
+echo "   • Authentication: Seamless using GitHub token from Codespaces"
+echo "   • Fallback: Manual authentication via Command Palette or web browser"
+
+echo ""
+echo "💡 Authentication Methods:"
+echo "   • Automatic: Uses GitHub token (seamless)"
+echo "   • Manual: Command Palette → 'Vyges: Login'"
+echo "   • Web: Visit https://profile.services.vyges.com"
+
+echo ""
+echo "🚀 Try Vyges AI:"
+echo "   • Ask the AI: 'Generate a Verilog module for UART controller'"
+echo "   • The AI has access to Vyges hardware IP context based on your subscription tier!"
+echo "   • Check status: seamless-auth status"
+
+echo ""
 echo "📁 Environment Setup:"
 echo "   Working Directory: $(pwd)"
 echo "   Home Directory: $HOME"
