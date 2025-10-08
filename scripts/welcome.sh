@@ -65,8 +65,8 @@ fi
 
 echo ""
 echo "🔐 Vyges Authentication:"
-echo "   Starting seamless authentication using your GitHub credentials..."
-cd /workspaces/vybox-lite/scripts && chmod +x seamless-auth.js && node seamless-auth.js authenticate
+echo "   Installing dependencies and starting seamless authentication..."
+cd /workspaces/vybox-lite/scripts && npm install && chmod +x seamless-auth.js && node seamless-auth.js authenticate
 
 echo ""
 echo "🎯 Vyges AI Context Setup:"
