@@ -5,10 +5,26 @@
  * Uses GitHub token from Codespaces to automatically authenticate with Vyges
  */
 
-const axios = require('axios');
 const fs = require('fs').promises;
 const path = require('path');
 const os = require('os');
+
+// Try to load axios from different possible locations
+let axios;
+try {
+    axios = require('axios');
+} catch (error) {
+    try {
+        // Try loading from user's home directory node_modules
+        axios = require(path.join(os.homedir(), 'node_modules', 'axios'));
+    } catch (error2) {
+        console.error('❌ Error: axios package not found. Please run: npm install axios');
+        console.error('   Available locations checked:');
+        console.error('   - Global: axios');
+        console.error('   - User home: ' + path.join(os.homedir(), 'node_modules', 'axios'));
+        process.exit(1);
+    }
+}
 
 // Configuration
 const CONFIG = {
