@@ -424,13 +424,25 @@ async function validateToken(token) {
  */
 async function showUserStatus(token) {
     try {
+        // For local accounts, show basic status without API call
+        const userData = await loadUserData();
+        if (userData) {
+            console.log(`👤 Authenticated as: ${userData.name || userData.login}`);
+            console.log(`📧 Email: ${userData.email || 'Not provided'}`);
+            console.log(`🎯 Tier: ${userData.subscription_tier?.toUpperCase() || 'FREE'}`);
+            console.log(`✨ Features: ${userData.features?.length || 3} available`);
+            console.log(`🔑 Auth Method: ${userData.auth_method || 'local'}`);
+            return userData;
+        }
+        
+        // Fallback: try cloud API if token exists
         const userInfo = await getUserInfoFromVyges(token);
         console.log(`👤 Authenticated as: ${userInfo.email || userInfo.name}`);
         console.log(`📊 Subscription tier: ${userInfo.subscription_tier}`);
         console.log(`🎯 Available features: ${userInfo.features.length} features`);
         return userInfo;
     } catch (error) {
-        console.log('⚠️  Could not fetch user status');
+        console.log('⚠️  Could not fetch user status - using local account');
         return null;
     }
 }

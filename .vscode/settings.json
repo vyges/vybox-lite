@@ -103,5 +103,8 @@
   "vycontext.showWelcomeMessage": true,
   "vycontext.enableUpgradePrompts": true,
   "vycontext.redirectUri": "https://profile.services.vyges.com/",
-  "vycontext.environment": "codespaces"
+  "vycontext.environment": "codespaces",
+  "vycontext.localTokenPath": "/home/vscode/.vyges/token.json",
+  "vycontext.enableLocalAuth": true,
+  "vycontext.fallbackToLocal": true
 }
