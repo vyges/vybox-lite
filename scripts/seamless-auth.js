@@ -372,22 +372,28 @@ async function createLocalAccount(githubUser) {
         created_at: now,
         is_local_account: true,
         features: getTierFeatures(subscriptionTier),
-        limits: getTierLimits(subscriptionTier)
+        limits: getTierLimits(subscriptionTier),
+        auth_method: 'local'
     };
 
     // Generate a local JWT token
     const localToken = generateLocalJWT(localUser);
 
+    const userData = {
+        ...localUser,
+        github_user: githubUser,
+        is_new_user: true,
+        is_seamless_auth: true,
+        is_local_account: true
+    };
+
+    // Save user data to disk for the VSCode extension to read
+    await saveUserData(userData);
+
     return {
         success: true,
         token: localToken,
-        user: {
-            ...localUser,
-            github_user: githubUser,
-            is_new_user: true,
-            is_seamless_auth: true,
-            is_local_account: true
-        }
+        user: userData
     };
 }
 
@@ -544,10 +550,41 @@ function generateLocalJWT(user) {
 
 async function loadExistingToken() {
     try {
-        const token = await fs.readFile(CONFIG.tokenPath, 'utf8');
-        return token.trim();
+        const tokenData = await fs.readFile(CONFIG.tokenPath, 'utf8');
+        
+        // Try to parse as JSON first (new format)
+        try {
+            const parsed = JSON.parse(tokenData);
+            return parsed.access_token;
+        } catch (parseError) {
+            // Fallback to plain text format (legacy)
+            return tokenData.trim();
+        }
     } catch (error) {
         return null;
+    }
+}
+
+async function loadUserData() {
+    try {
+        const userDataPath = path.join(CONFIG.userDataPath, '.vyges-user.json');
+        const userData = await fs.readFile(userDataPath, 'utf8');
+        return JSON.parse(userData);
+    } catch (error) {
+        return null;
+    }
+}
+
+async function saveUserData(userData) {
+    try {
+        // Ensure the directory exists
+        await fs.mkdir(CONFIG.userDataPath, { recursive: true });
+        
+        const userDataPath = path.join(CONFIG.userDataPath, '.vyges-user.json');
+        await fs.writeFile(userDataPath, JSON.stringify(userData, null, 2), { mode: 0o600 });
+        console.log(`💾 User data saved to: ${userDataPath}`);
+    } catch (error) {
+        console.error('❌ Failed to save user data:', error.message);
     }
 }
 
