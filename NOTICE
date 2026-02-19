@@ -28,8 +28,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 - Environment metadata and configuration templates
 - The Vyges CLI tool and related tooling
 - **AI context and processing engine components:**
-  - `.vyges-ai-context.json` - AI development context and prompts
-  - `.copilot-chat-context.md` - GitHub Copilot integration context
+  - **VyContext** VSCode extension - AI development context and Vyges conventions
   - AI-generated code patterns and development workflows
   - AI prompt engineering and context management systems
 

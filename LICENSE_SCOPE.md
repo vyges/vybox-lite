@@ -44,8 +44,7 @@ The development environment structure, build processes, and tooling are provided
 - **Vyges Tools**: The Vyges CLI and related development tools
 - **Documentation Templates**: Template documentation structure and examples
 - **AI Context and Processing Engine**:
-  - `.vyges-ai-context.json` - AI development context and prompts
-  - `.copilot-chat-context.md` - GitHub Copilot integration context
+  - **VyContext** VSCode extension - AI development context and Vyges conventions
   - AI-generated code patterns and development workflows
   - AI prompt engineering and context management systems
   - AI-assisted development methodologies and best practices
@@ -57,8 +56,7 @@ Dockerfile                     # ❌ Container build process
 scripts/welcome.sh             # ❌ Environment setup script
 vyges-metadata.schema.json     # ❌ Vyges metadata schema
 README.md                      # ❌ Environment documentation
-.vyges-ai-context.json        # ❌ AI context and prompts
-.copilot-chat-context.md      # ❌ GitHub Copilot integration
+VyContext (extension)          # ❌ AI context and Vyges conventions
 ```
 
 ## Development Environment Components and Licensing
@@ -106,24 +104,23 @@ When using the development environment:
 
 The following components are **proprietary Vyges components** provided under a **limited-use, non-commercial license**:
 
-#### AI Context Files
-- **`.vyges-ai-context.json`**: AI development context and prompts
-- **`.copilot-chat-context.md`**: GitHub Copilot integration context
+#### AI Context (VyContext)
+- **VyContext** VSCode extension provides AI development context and Vyges conventions (installed via devcontainer; not redistributed as files)
 
 #### Usage Rights for Proprietary Components
 
 **✅ What You CAN Do:**
-- Use these files within this Codespaces environment
+- Use VyContext and AI context within this Codespaces environment
 - Leverage the AI context for your development work
 - Reference AI-generated patterns and conventions
 - Use the AI context with compatible AI tools (Cursor, Copilot, etc.)
 
 **❌ What You CANNOT Do:**
-- Redistribute these files under Apache-2.0 or any other license
-- Modify and distribute the AI context files
+- Redistribute VyContext or Vyges AI context under Apache-2.0 or any other license
+- Modify and distribute the extension or context for redistribution
 - Extract and reuse AI prompts and context patterns commercially
-- Include these files in derivative works or forked repositories
-- Use these files outside of this Codespaces environment
+- Include proprietary context in derivative works or forked repositories
+- Use Vyges AI context outside of this Codespaces environment
 
 **📋 Licensing Terms:**
 - **License Type**: Limited-use, non-commercial

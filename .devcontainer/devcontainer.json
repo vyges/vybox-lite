@@ -5,6 +5,7 @@
     "context": "."
   },
   "postCreateCommand": "cd /workspaces/vybox-lite && bash ./scripts/welcome.sh",
+  "postStartCommand": "cd /workspaces/vybox-lite/scripts && node seamless-auth.js authenticate",
   "customizations": {
     "vscode": {
       "extensions": [

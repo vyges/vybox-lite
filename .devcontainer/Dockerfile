@@ -2,10 +2,10 @@ FROM mcr.microsoft.com/devcontainers/base:ubuntu-24.04
 
 LABEL maintainer="Vyges <support@vyges.com>" \
       description="VyBox Lite: Codespaces development environment" \
-      version="0.1.0" \
+      version="0.1.1" \
       vendor="Vyges" \
       edition="Lite - Codespaces" \
-      vybox_build_date="2025-08-17"
+      vybox_build_date="2026-02-19"
 
 # Set environment variables early for better caching
 ENV DEBIAN_FRONTEND=noninteractive \
@@ -29,14 +29,9 @@ RUN locale-gen en_US.UTF-8
 RUN mkdir -p /home/vscode/.local/bin /opt/vyges \
  && chown -R vscode:vscode /home/vscode /opt/vyges
 
-# Layer 4: Download Vyges files (as root)
+# Layer 4: Download Vyges schema only (AI context via VyContext extension in devcontainer.json)
 RUN curl -sSL https://raw.githubusercontent.com/vyges/vyges-metadata-spec/main/schema/v1/vyges-metadata.schema.json \
-       -o /opt/vyges/vyges-metadata.schema.json \
- && curl -sSL https://raw.githubusercontent.com/vyges/vyges-ip-template/refs/heads/main/.vyges-ai-context.json \
-       -o /home/vscode/.vyges-ai-context.json \
- && curl -sSL https://raw.githubusercontent.com/vyges/vyges-ip-template/refs/heads/main/.copilot-chat-context.md \
-       -o /home/vscode/.copilot-chat-context.md \
- && chown vscode:vscode /home/vscode/.vyges-ai-context.json /home/vscode/.copilot-chat-context.md
+       -o /opt/vyges/vyges-metadata.schema.json
 
 # Layer 5: Branding MOTD (as root)
 RUN echo '---------------------------------' > /etc/motd \
