@@ -109,6 +109,8 @@ llm "Generate a Verilog module for an AXI4-Lite slave interface"
 # Just start typing in any .sv file and Copilot will have Vyges context
 ```
 
+**Same model in Copilot Chat (zero setup in Codespaces):** The devcontainer sets the default LLM to match the terminal (GitHub Models / GPT-4.1) and, on start, configures Copilot Chat and inline chat to use it. Open Copilot Chat and pick **GPT-4.1 (GitHub Models)** if needed. Details: [Using the same LLM in Copilot Chat](docs/copilot-chat-github-models.md).
+
 ## 💡 Why Codespaces?
 
 - **Zero install**: Runs in your browser

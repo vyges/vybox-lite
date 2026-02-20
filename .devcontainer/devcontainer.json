@@ -5,7 +5,7 @@
     "context": "."
   },
   "postCreateCommand": "cd /workspaces/vybox-lite && bash ./scripts/welcome.sh",
-  "postStartCommand": "cd /workspaces/vybox-lite/scripts && node seamless-auth.js authenticate",
+  "postStartCommand": "cd /workspaces/vybox-lite/scripts && node seamless-auth.js authenticate && node configure-copilot-github-models.js",
   "customizations": {
     "vscode": {
       "extensions": [
@@ -98,7 +98,8 @@
         "vycontext.environment": "codespaces",
         "vycontext.localTokenPath": "/home/vscode/.vyges/token.json",
         "vycontext.enableLocalAuth": true,
-        "vycontext.fallbackToLocal": true
+        "vycontext.fallbackToLocal": true,
+        "inlineChat.defaultModel": "openai/gpt-4.1"
       },
       "settingsProfiles": {
         "Vyges Blue": {
